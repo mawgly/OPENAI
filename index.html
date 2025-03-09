@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тетрис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 class="game-title">Mawgly <span>TETRIS</span></h1>
+    
+    <div class="game-container">
+        <div class="game-info">
+            <div class="info-block">
+                <h2>Счёт</h2>
+                <div id="score">0</div>
+            </div>
+            <div class="info-block">
+                <h2>Скорость</h2>
+                <div id="speed">1</div>
+            </div>
+            <div class="info-block">
+                <h2>Сохранено</h2>
+                <div id="hold-piece" class="preview-container"></div>
+            </div>
+        </div>
+
+        <div id="game-board" class="game-board"></div>
+
+        <div class="side-panel">
+            <div class="info-block">
+                <h2>Следующая</h2>
+                <div id="next-piece" class="preview-container"></div>
+            </div>
+            <div class="info-block high-scores-container">
+                <h2>TOP 5</h2>
+                <div id="high-scores">
+                    <table id="high-scores-table">
+                        <thead>
+                            <tr>
+                                <th>Место</th>
+                                <th>Имя</th>
+                                <th>Счёт</th>
+                            </tr>
+                        </thead>
+                        <tbody id="high-scores-body">
+                            <!-- Здесь будут отображаться рекорды -->
+                        </tbody>
+                    </table>
+                </div>
+                <button id="view-all-scores-btn" class="view-all-scores-btn">Посмотреть полную таблицу</button>
+            </div>
+            <div class="controls">
+                <button id="start-button">Начать</button>
+                <button id="pause-button">Пауза</button>
+                <div class="control-info">
+                    <h3>Управление:</h3>
+                    <p>← → : Двигать</p>
+                    <p>↑ : Вращать</p>
+                    <p>↓ : Ускорить</p>
+                    <p>Пробел : Сбросить</p>
+                    <p>CTRL : Сохранить фигуру</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-over" class="game-over hidden">
+        <div class="game-over-content">
+            <h2>Игра окончена!</h2>
+            <div id="final-score"></div>
+            <div id="new-high-score" class="hidden">
+                <p>Поздравляем! Вы попали в таблицу рекордов!</p>
+                <div class="player-name-input">
+                    <label for="player-name">Введите ваше имя:</label>
+                    <input type="text" id="player-name" maxlength="10" placeholder="Игрок" />
+                    
+                    <label for="player-email">Введите ваш email:</label>
+                    <input type="email" id="player-email" placeholder="example@mail.com" required />
+                    <p class="email-note">* Email не будет виден другим игрокам</p>
+                    
+                    <button id="save-score-btn">Сохранить</button>
+                </div>
+            </div>
+            <button id="restart-button">Играть снова</button>
+        </div>
+    </div>
+    
+    <script src="tetris.js"></script>
+</body>
+</html>

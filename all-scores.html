@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mawgly TETRIS - Таблица рекордов</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            margin: 20px 0;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .scores-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .scores-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .scores-table th,
+        .scores-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .scores-table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .scores-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .scores-table tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .back-button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+        
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mawgly TETRIS - Полная таблица рекордов</h1>
+    
+    <div class="scores-container">
+        <table class="scores-table" id="all-scores-table">
+            <thead>
+                <tr>
+                    <th>Место</th>
+                    <th>Имя</th>
+                    <th>Счёт</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody id="all-scores-body">
+                <!-- Здесь будут отображаться рекорды -->
+            </tbody>
+        </table>
+        <div id="empty-message" class="empty-message hidden">
+            Пока нет рекордов. Сыграйте в Тетрис, чтобы попасть в таблицу лидеров!
+        </div>
+    </div>
+    
+    <button class="back-button" onclick="window.close()">Вернуться к игре</button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Получаем данные рекордов из localStorage
+            const highScores = JSON.parse(localStorage.getItem('tetrisHighScores') || '[]');
+            const allScoresBody = document.getElementById('all-scores-body');
+            const emptyMessage = document.getElementById('empty-message');
+            
+            if (highScores.length === 0) {
+                // Если рекордов нет, показываем сообщение
+                emptyMessage.classList.remove('hidden');
+            } else {
+                // Показываем рекорды
+                highScores.forEach((score, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Форматируем дату
+                    const date = new Date(score.date);
+                    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+                    
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${score.name}</td>
+                        <td>${score.score}</td>
+                        <td>${formattedDate}</td>
+                    `;
+                    
+                    allScoresBody.appendChild(row);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
